@@ -147,6 +147,7 @@ output application/json
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="5cf8c36a-5104-47ea-b801-97b882946e6f" message="dfvbkmgcvmb.cvm"/>
     </flow>
     <flow name="post:\product:application\json:second-raml-config">
         <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
