@@ -1,0 +1,60 @@
+#%RAML 1.0
+title: second-raml
+/product:
+  
+  get:
+    description: this is api for fetching the data
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "id":1,
+                "name":"bhanu"
+              }
+  post:
+    description: this is inserying the data
+    body:
+          application/json:
+            example:
+              {
+                "id":123
+              }
+    responses:
+        201:
+          body:
+                application/json:
+                    example:
+                          {
+                            "result":"sucessfully inserting the data"
+                          }          
+  put:
+    description: this is updating the data
+    body:
+          application/json:
+            example:
+              {
+                "id":123
+              }
+    responses:
+        201:
+          body:
+                application/json:
+                    example:
+                          {
+                            "result":"sucessfully updating the data"
+                          }
+                           
+  
+ 
+                            
+
+
+                   
+  
+
+
+  
+                                                                  
+    
