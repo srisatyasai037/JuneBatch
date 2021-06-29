@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a44afb2b-ce68-458e-8bf0-13212bce8304" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="scatter-gatherexamplesFlow" doc:id="0044601a-27f2-41f6-a624-9097a9535ae7" >
+		<http:listener doc:name="Listener" doc:id="ff53d829-1e0e-4bdf-a827-77037c8b97df" config-ref="HTTP_Listener_config" path="/scatter"/>
+		<logger level="INFO" doc:name="Logger" doc:id="37ffc83e-721b-4735-8a6c-28938c58c894" message="data ::::#[payload]"/>
+		<scatter-gather doc:name="Scatter-Gather" doc:id="60903453-a820-40c0-90b4-2f87bb0bbb8b" >
+			<route >
+				<logger level="INFO" doc:name="Logger" doc:id="891855e1-4a39-487d-ad82-486f12064217" message="#[payload]"/>
+			</route>
+			<route >
+				<logger level="INFO" doc:name="Logger" doc:id="5d051395-fae6-462e-b807-f9fbeb01759c" message="#[payload]"/>
+			</route>
+			<route >
+				<logger level="INFO" doc:name="Logger" doc:id="d185dfef-1644-4076-a8a2-d11420525c01" message="#[payloadddd]"/>
+			</route>
+		</scatter-gather>
+		<ee:transform doc:name="Transform Message" doc:id="87ee3998-21fb-4f75-a5e2-fbf197442aab" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="622ccca3-7107-4ae8-a090-c5358ad943af" message="final resp :::#[payload]"/>
+		<error-handler>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="f48a179c-fad1-4815-8952-52bcabc57861" type="MULE:COMPOSITE_ROUTING">
+				<logger level="INFO" doc:name="Logger" doc:id="54449f14-d803-40ca-862c-ecfff269c2e4" message="#[error.errorType]"/>
+				<set-variable value="#[error.errorType]" doc:name="Set Variable" doc:id="7a6ba8bc-33f1-4b82-809f-cd9617c3f231" variableName="errorissue"/>
+				<logger level="INFO" doc:name="Logger" doc:id="17a27447-df33-4e68-ab1d-385826ba444c" message="#[vars.errorissue]"/>
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+</mule>
