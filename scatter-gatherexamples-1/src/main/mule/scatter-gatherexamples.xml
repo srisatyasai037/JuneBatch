@@ -34,6 +34,7 @@ payload]]></ee:set-payload>
 		</ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="622ccca3-7107-4ae8-a090-c5358ad943af" message="final output :::#[payload]"/>
 		<logger level="INFO" doc:name="Logger" doc:id="185f3ebc-9fb2-4729-b92a-c052ba40f32c" message="end flow:::"/>
+		<logger level="INFO" doc:name="Logger" doc:id="8d6cf025-424d-443d-8fa7-9f16405fcc32" message="this flow second end:::::::::::"/>
 		<error-handler>
 			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="f48a179c-fad1-4815-8952-52bcabc57861" type="MULE:COMPOSITE_ROUTING">
 				<logger level="INFO" doc:name="Logger" doc:id="54449f14-d803-40ca-862c-ecfff269c2e4" message="#[error.errorType]"/>
